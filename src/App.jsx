@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
+
 import { starterProducts } from './data/products.js'
+
 import HomePage from './pages/HomePage.jsx'
 import ProductsPage from './pages/ProductsPage.jsx'
 import AddProductPage from './pages/AddProductPage.jsx'
@@ -9,43 +11,178 @@ import TeamOnePage from './pages/TeamOnePage.jsx'
 import TeamTwoPage from './pages/TeamTwoPage.jsx'
 import TeamLayout from './pages/TeamLayout.jsx'
 import UserPage from './pages/UserPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+
 import MainLayout from './layouts/MainLayout.jsx'
 import ShopLayout from './layouts/ShopLayout.jsx'
 
 
 function App() {
-  // State is data that can change while the app is open.
   const [products, setProducts] = useState(starterProducts)
 
-  // useEffect runs after React updates the page.
+  // Current logged-in user
+  const [user, setUser] = useState(null)
+
   useEffect(() => {
     document.title = `${products.length} products | Stock Starter`
   }, [products.length])
 
   function addProduct(newProduct) {
-    setProducts((prevProducts) => [...prevProducts, newProduct])
+    setProducts((prevProducts) => [
+      ...prevProducts,
+      newProduct,
+    ])
+  }
+
+  // Called after successful login
+  function handleLogin(userData) {
+    setUser(userData)
+  }
+
+  // Logout
+  function handleLogout() {
+    setUser(null)
   }
 
   return (
     <Routes>
-      {/* Main / Admin Layout with Sidebar */}
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<HomePage products={products} />} />
-        <Route path="/products" element={<ProductsPage products={products} />} />
-        <Route path="/add-product" element={<AddProductPage onAddProduct={addProduct} />} />
-        <Route path="/users" element={<UserPage />} />
-        <Route path="/team" element={<TeamLayout />}>
-          <Route index element={<p>Select Team 1 or Team 2 from the sidebar.</p>} />
-          <Route path="team-1" element={<TeamOnePage />} />
-          <Route path="team-2" element={<TeamTwoPage />} />
+
+      {/* =========================
+          LOGIN
+      ========================= */}
+
+      <Route
+        path="/login"
+        element={
+          user ? (
+            <Navigate
+              to={user.role === 'admin' ? '/' : '/shop'}
+              replace
+            />
+          ) : (
+            <LoginPage onLogin={handleLogin} />
+          )
+        }
+      />
+
+
+      {/* =========================
+          ADMIN / MAIN LAYOUT
+      ========================= */}
+
+      <Route
+        element={
+          user?.role === 'admin' ? (
+            <MainLayout onLogout={handleLogout} />
+          ) : (
+            <Navigate
+              to="/login"
+              replace
+            />
+          )
+        }
+      >
+
+        <Route
+          path="/"
+          element={
+            <HomePage
+              products={products}
+            />
+          }
+        />
+
+        <Route
+          path="/products"
+          element={
+            <ProductsPage
+              products={products}
+            />
+          }
+        />
+
+        <Route
+          path="/add-product"
+          element={
+            <AddProductPage
+              onAddProduct={addProduct}
+            />
+          }
+        />
+
+        <Route
+          path="/users"
+          element={<UserPage />}
+        />
+
+        <Route
+          path="/team"
+          element={<TeamLayout />}
+        >
+          <Route
+            index
+            element={
+              <p>
+                Select Team 1 or Team 2 from the sidebar.
+              </p>
+            }
+          />
+
+          <Route
+            path="team-1"
+            element={<TeamOnePage />}
+          />
+
+          <Route
+            path="team-2"
+            element={<TeamTwoPage />}
+          />
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
+
       </Route>
 
-      {/* New /shop Layout */}
-      <Route path="/shop" element={<ShopLayout />}>
-        <Route index element={<UserPage />} />
+
+      {/* =========================
+          CUSTOMER / SHOP LAYOUT
+      ========================= */}
+
+      <Route
+        element={
+          user?.role === 'customer' ? (
+            <ShopLayout onLogout={handleLogout} />
+          ) : (
+            <Navigate
+              to="/login"
+              replace
+            />
+          )
+        }
+      >
+
+        <Route
+          path="/shop"
+          element={
+            <div>
+              <h1>Shop</h1>
+              <p>
+                Welcome to Korean Beauty Shop.
+              </p>
+            </div>
+          }
+        />
+
       </Route>
+
+
+      {/* =========================
+          PAGE NOT FOUND
+      ========================= */}
+
+      <Route
+        path="*"
+        element={<NotFoundPage />}
+      />
+
     </Routes>
   )
 }

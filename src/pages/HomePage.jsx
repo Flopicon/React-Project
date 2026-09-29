@@ -26,26 +26,26 @@ function HomePage({ products }) {
       </p>
 
       <div className="summary-grid">
-        <article className="summary-card">
-          <span>Total Products</span>
-          <strong>{products.length}</strong>
-        </article>
+  <article className="summary-card total-products">
+    <span>Total Products</span>
+    <strong>{products.length}</strong>
+  </article>
 
-        <article className="summary-card">
-          <span>Daily Sales</span>
-          <strong>${dailySales}</strong>
-        </article>
+  <article className="summary-card daily-sales">
+    <span>Daily Sales</span>
+    <strong>${dailySales}</strong>
+  </article>
 
-        <article className="summary-card">
-          <span>In Stock</span>
-          <strong>{inStockCount}</strong>
-        </article>
+  <article className="summary-card in-stock">
+    <span>In Stock</span>
+    <strong>{inStockCount}</strong>
+  </article>
 
-        <article className="summary-card">
-          <span>Out of Stock</span>
-          <strong>{outOfStockCount}</strong>
-        </article>
-      </div>
+  <article className="summary-card out-of-stock">
+    <span>Out of Stock</span>
+    <strong>{outOfStockCount}</strong>
+  </article>
+</div>
 
       <div className="overview-actions">
         <a href="/add-product" className="add-product-button">

@@ -1,20 +1,51 @@
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Flex, Form, Input } from 'antd'
+import { Button, Checkbox, Flex, Form, Input, message } from 'antd'
 
 function LoginForm({ onLogin }) {
+
   const onFinish = (values) => {
-    onLogin(values)
+
+    // ADMIN LOGIN
+    if (
+      values.username === 'admin' &&
+      values.password === '123456'
+    ) {
+      onLogin({
+        username: values.username,
+        role: 'admin',
+      })
+
+      return
+    }
+
+    // CUSTOMER LOGIN
+    if (
+      values.username === 'customer' &&
+      values.password === '123456'
+    ) {
+      onLogin({
+        username: values.username,
+        role: 'customer',
+      })
+
+      return
+    }
+
+    // WRONG LOGIN
+    message.error('Invalid username or password')
   }
 
   return (
     <Form
       name="login"
       initialValues={{ remember: true }}
-      style={{ maxWidth: 360 }}
       onFinish={onFinish}
       autoComplete="off"
     >
+
+      {/* USERNAME */}
+
       <Form.Item
         name="username"
         rules={[
@@ -29,6 +60,9 @@ function LoginForm({ onLogin }) {
           placeholder="Username"
         />
       </Form.Item>
+
+
+      {/* PASSWORD */}
 
       <Form.Item
         name="password"
@@ -50,14 +84,22 @@ function LoginForm({ onLogin }) {
         />
       </Form.Item>
 
+
+      {/* REMEMBER + FORGOT */}
+
       <Form.Item>
-        <Flex justify="space-between" align="center">
+        <Flex
+          justify="space-between"
+          align="center"
+        >
           <Form.Item
             name="remember"
             valuePropName="checked"
             noStyle
           >
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>
+              Remember me
+            </Checkbox>
           </Form.Item>
 
           <a href="#forgot-password">
@@ -65,6 +107,9 @@ function LoginForm({ onLogin }) {
           </a>
         </Flex>
       </Form.Item>
+
+
+      {/* LOGIN BUTTON */}
 
       <Form.Item>
         <Button
@@ -75,6 +120,7 @@ function LoginForm({ onLogin }) {
           Log in
         </Button>
       </Form.Item>
+
     </Form>
   )
 }

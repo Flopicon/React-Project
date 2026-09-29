@@ -28,9 +28,48 @@ button,
   color: #ffffff;
   font-weight: 700;
   cursor: pointer;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+.primary-link {
+  min-height: 44px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: #d77b94;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
   text-decoration: none;
 }
 
+button:hover,
+.primary-link:hover {
+  background: #c96883;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #5af4ff;
+  outline-offset: 3px;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  min-height: 100dvh;
+  transition: grid-template-columns 200ms ease;
+}
+
+.app-shell.sidebar-collapsed {
+  grid-template-columns: 76px minmax(0, 1fr);
+}
 button:hover,
 .primary-link:hover {
   background: #c96883;
@@ -62,16 +101,48 @@ input:focus-visible {
   overflow: hidden;
   padding: 0 20px;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand-mark img {
+  display: grid;
+  width: 30px;
+  min-width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.sidebar-heading {
+  margin: 30px 12px 8px;
+  color: #91a6b4;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sidebar-nav a {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 14px;
+  overflow: hidden;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: #d7e4ec;
+  text-decoration: none;
   white-space: nowrap;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   user-select: none;
   transition: all 0.2s;
 }
 
-.brand:hover {
-  background: rgba(255, 255, 255, 0.04);
+.sidebar-nav a:hover {
+  background: #f9e1e7;
 }
 
 .brand-mark img {
@@ -129,16 +200,61 @@ input:focus-visible {
   display: inline-block;
 }
 
-.window-dot.red {
-  background: #ff4d4f;
+.red {
+  background: #f04438;
 }
 
-.window-dot.yellow {
-  background: #faad14;
+.yellow {
+  background: #fdb022;
 }
 
-.window-dot.green {
-  background: #52c41a;
+.green {
+  background: #4caf50;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+
+.skip-link:focus {
+  left: 16px;
+  top: 12px;
+  z-index: 1;
+  padding: 8px;
+  background: #ffffff;
+}
+
+.page-content {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 28px 24px;
+}
+
+.breadcrumb {
+  margin-bottom: 16px;
+  color: #667085;
+  font-size: 14px;
+}
+
+.breadcrumb span {
+  padding: 0 8px;
+  color: #98a2b3;
+}
+
+.content-surface {
+  width: 100%;
+  min-height: calc(100dvh - 150px);
+  padding: 34px;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+h1,
+h3,
+p {
+  margin-top: 0;
 }
 
 .skip-link {
@@ -232,24 +348,80 @@ h1 {
 }
 
 .summary-card {
-  min-height: 105px;
+  min-height: 120px;
   padding: 24px;
   border-radius: 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
+  border: 1px solid;
 }
 
 .summary-card span {
   font-size: 15px;
-  color: #475569;
+  font-weight: 500;
 }
 
 .summary-card strong {
   font-size: 28px;
   font-weight: 700;
-  color: #111827;
+}
+
+/* Total Products */
+.total-products {
+
+  background: #f3e8ff;
+  border-color: #d8b4fe;
+}
+
+.total-products span{
+  font-size: large;
+}
+.total-products strong {
+  color: #7e22ce;
+}
+
+
+/* Daily Sales */
+.daily-sales {
+  background: #fce7f3;
+  border-color: #f9a8d4;
+}
+
+.daily-sales span{
+  font-size: large;
+}
+.daily-sales strong {
+  color: #be185d;
+}
+
+
+/* In Stock */
+.in-stock {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.in-stock span{
+   font-size: large;
+}
+.in-stock strong {
+  color: #15803d;
+}
+
+
+/* Out of Stock */
+.out-of-stock {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.out-of-stock span{
+  font-size: large;
+}
+.out-of-stock strong {
+  color: #b91c1c;
 }
 .overview-actions {
   display: flex;
@@ -421,7 +593,159 @@ input {
     padding: 20px 12px;
   }
 
+.summary-grid span {
+  color: #475467;
+}
+
+.product-card {
+  width: 200px;
+  height: 100px;
+  border: 2px solid #08fff3;
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 20px;
+}
+
+.product-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 28px;
+}
+
+.product-category {
+  color: #475467;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.stock-status {
+  color: #087f5b;
+  font-weight: 700;
+}
+
+.out-of-stock {
+  color: #b42318;
+}
+
+.form-section {
+  max-width: 620px;
+}
+
+.product-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+  padding: 24px;
+  border: 1px solid #d9dde3;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.product-form div {
+  display: grid;
+  gap: 6px;
+}
+
+label {
+  font-weight: 700;
+}
+
+input {
+  min-height: 44px;
+  border: 1px solid #98a2b3;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.form-message {
+  min-height: 24px;
+  margin-bottom: 0;
+  color: #087f5b;
+  font-weight: 700;
+}
+
+.empty-message {
+  margin-top: 28px;
+  padding: 20px;
+  border-left: 4px solid #1677ff;
+  background: #eff6ff;
+}
+
+  .example-message {
+    max-width: 620px;
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid #d9dde3;
+    border-radius: 6px;
+    background: #f8fafc;
+}
+}
+
+@media (max-width: 600px) {
+  .app-shell,
+  .app-shell.sidebar-collapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    min-height: auto;
+    padding: 12px 16px;
+  }
+
+  .brand {
+    background: transparent;
+    padding: 0;
+  }
+
+  .sidebar-heading,
+  .sidebar-toggle {
+    display: none;
+  }
+
+  .sidebar-nav {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 12px;
+  }
+
+  .sidebar-nav a,
+  .sidebar-group-button {
+    justify-content: center;
+    padding: 10px 6px;
+  }
+
+  .sidebar-nav .nav-label {
+    display: none;
+  }
+
+  .sidebar-collapsed .nav-label {
+    display: none;
+  }
+
+  .sidebar-submenu {
+    display: none;
+  }
+
+  .workspace-bar {
+    min-height: 40px;
+  }
+
+  .workspace-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .page-content {
+    padding: 20px 12px;
+  }
+
   .content-surface {
     padding: 16px !important;
   }
+  .login-page {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 }
