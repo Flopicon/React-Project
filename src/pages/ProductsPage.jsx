@@ -656,7 +656,7 @@ const databaseProducts = [
     stock: 55,
     description: "Deeply hydrating serum that absorbs quickly without stickiness.",
     price: 19.0,
-    product_image: "/image/Torriden Dive-In Low Mole...yaluronic Acid Serrum.jpg",
+    product_image: "/image/Torriden Dive-In Low Molecular Hyaluronic Acid Serrum.jpg",
     skin_type: "Dehydrated Skin",
     created_at: "2026-09-15 10:38:23",
   },
