@@ -52,28 +52,6 @@ function MainLayout() {
       </Sider>
 
       <Layout style={{ background: '#f5f7fa' }}>
-        <Header
-          style={{
-            padding: '0 24px',
-            background: '#ffffff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderBottom: '1px solid #e8e8e8',
-            height: 56,
-            lineHeight: '56px',
-          }}
-        >
-          <div className="window-controls" aria-hidden="true" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <span className="window-dot red" />
-            <span className="window-dot yellow" />
-            <span className="window-dot green" />
-          </div>
-          <Text type="secondary" style={{ fontSize: 13, fontWeight: 500 }}>
-            React Inventory Practice • Ant Design UI
-          </Text>
-        </Header>
-
         <Content style={{ margin: '20px 24px 0', minHeight: 280 }}>
           <Breadcrumb
             items={breadcrumbItems}
