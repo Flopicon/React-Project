@@ -736,7 +736,6 @@ function ProductsPage({ products }) {
             src={record.product_image} 
             alt={text} 
             style={{ width: "44px", height: "44px", objectFit: "cover", borderRadius: "8px", border: "1px solid #f0f0f0" }} 
-            onError={(e) => { e.target.src = "/image/Skin 1004 Madagascar Centella Ampoule.jpg"; }} 
           />
           <span style={{ fontWeight: 500 }}>{text}</span>
         </Space>
