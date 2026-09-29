@@ -1,65 +1,97 @@
-import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router'
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, House, Package, PlusCircle, UsersRound } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router'
+import { Menu } from 'antd'
 
-function Navigation({ isCollapsed, onToggle }) {
-  const [isTeamOpen, setIsTeamOpen] = useState(true)
+import {
+  AppstoreOutlined,
+  HomeOutlined,
+  PlusCircleOutlined,
+  ShopOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
+import LOTUSLogo from '/src/assets/lotus.png'
+
+function Navigation({ isCollapsed }) {
   const location = useLocation()
-  const isTeamActive = location.pathname.startsWith('/team')
+  const navigate = useNavigate()
+
+  const menuItems = [
+    {
+      key: '/',
+      icon: <HomeOutlined />,
+      label: 'Overview',
+    },
+    {
+      key: '/products',
+      icon: <AppstoreOutlined />,
+      label: 'Products',
+    },
+    {
+      key: '/add-product',
+      icon: <PlusCircleOutlined />,
+      label: 'Add product',
+    },
+    {
+      key: '/users',
+      icon: <UserOutlined />,
+      label: 'Users',
+    },
+    {
+      key:'/admin',
+      icon:<PlusCircleOutlined />,
+      label:'Admin'
+    },
+    {
+      key: '/shop',
+      icon: <ShopOutlined />,
+      label: 'Shop',
+    },
+    {
+      key: 'team-group',
+      icon: <TeamOutlined />,
+      label: 'Team',
+      children: [
+        {
+          key: '/team/team-1',
+          icon: <UserOutlined />,
+          label: 'Team 1',
+        },
+        {
+          key: '/team/team-2',
+          icon: <UserOutlined />,
+          label: 'Team 2',
+        },
+      ],
+    },
+  ]
+
+  // Find active key based on current pathname
+  const activeKey = location.pathname
+
+  const handleMenuClick = ({ key }) => {
+    if (key.startsWith('/')) {
+      navigate(key)
+    }
+  }
 
   return (
-    <aside className="sidebar">
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <NavLink className="brand" to="/">
-        <span className="brand-mark">S</span>
-        <span className="nav-label">Stock Starter</span>
-      </NavLink>
-      <p className="sidebar-heading nav-label">Workspace</p>
-      <nav className="sidebar-nav" aria-label="Main navigation">
-        <NavLink to="/" end>
-          <House aria-hidden="true" size={19} />
-          <span className="nav-label">Overview</span>
-        </NavLink>
-        <NavLink to="/products">
-          <Package aria-hidden="true" size={19} />
-          <span className="nav-label">Products</span>
-        </NavLink>
-        <NavLink to="/add-product">
-          <PlusCircle aria-hidden="true" size={19} />
-          <span className="nav-label">Add product</span>
-        </NavLink>
-        <div className="sidebar-group">
-          <button
-            className={isTeamActive ? 'sidebar-group-button active' : 'sidebar-group-button'}
-            type="button"
-            onClick={() => setIsTeamOpen(!isTeamOpen)}
-            aria-expanded={isTeamOpen}
-            aria-controls="team-submenu"
-          >
-            <UsersRound aria-hidden="true" size={19} />
-            <span className="nav-label">Team</span>
-            <span className="group-arrow nav-label">
-              {isTeamOpen ? <ChevronUp aria-hidden="true" size={17} /> : <ChevronDown aria-hidden="true" size={17} />}
-            </span>
-          </button>
-          {isTeamOpen && (
-            <div className="sidebar-submenu" id="team-submenu">
-              <NavLink to="/team/team-1">Team 1</NavLink>
-              <NavLink to="/team/team-2">Team 2</NavLink>
-            </div>
-          )}
-        </div>
-      </nav>
-      <button
-        className="sidebar-toggle"
-        type="button"
-        onClick={onToggle}
-        aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-      >
-        {isCollapsed ? <ChevronRight aria-hidden="true" size={20} /> : <ChevronLeft aria-hidden="true" size={20} />}
-      </button>
-    </aside>
+    <div className="nav-container">
+      <div className="brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        <span className="brand-mark">
+          <img src={LOTUSLogo} width={30} alt="" />
+        </span>
+        {!isCollapsed && <span className="nav-label">Prettier Beauty</span>}
+      </div>
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[activeKey]}
+        defaultOpenKeys={['team-group']}
+        items={menuItems}
+        onClick={handleMenuClick}
+        style={{ borderRight: 0, background: 'transparent' }}
+      />
+    </div>
   )
 }
 

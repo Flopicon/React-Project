@@ -10,6 +10,7 @@ import TeamOnePage from './pages/TeamOnePage.jsx'
 import TeamTwoPage from './pages/TeamTwoPage.jsx'
 import TeamLayout from './pages/TeamLayout.jsx'
 
+
 function App() {
   // State is data that can change while the app is open.
   const [products, setProducts] = useState(starterProducts)
@@ -41,18 +42,11 @@ function App() {
         onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
       />
       <section className="app-workspace">
-        <header className="workspace-bar">
-          <div className="window-controls" aria-hidden="true">
-            <span className="window-dot red"></span>
-            <span className="window-dot yellow"></span>
-            <span className="window-dot green"></span>
-          </div>
-          <span className="workspace-name">React inventory practice</span>
-        </header>
+
         <main className="page-content" id="main-content">
           <p className="breadcrumb">Inventory <span>/</span> {pageName}</p>
           <div className="content-surface">
-            <Routes>
+               <Routes>
               <Route path="/" element={<HomePage products={products} />} />
               <Route path="/products" element={<ProductsPage products={products} />} />
               <Route path="/add-product" element={<AddProductPage onAddProduct={addProduct} />} />

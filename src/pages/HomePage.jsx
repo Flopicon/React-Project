@@ -1,20 +1,62 @@
-import { Link } from 'react-router'
-
 function HomePage({ products }) {
-  const outOfStockCount = products.filter((product) => product.quantity === 0).length
+  const outOfStockCount = products.filter(
+    (product) => product.quantity === 0
+  ).length
+
+  const inStockCount = products.filter(
+    (product) => product.quantity > 0
+  ).length
+  function HomePage({ products }) {
+  const outOfStockCount = products.filter(
+    (product) => product.quantity === 0
+  ).length
+
+  const inStockCount = products.filter(
+    (product) => product.quantity > 0
+  ).length
+
+  const dailySales = 120
+}
 
   return (
-    <section className="intro-section">
-      <p className="eyebrow">React fundamentals</p>
-      <h1>Product inventory, one small React idea at a time.</h1>
-      <p className="intro-text">
-        This practice project stores products in React state. Add a product, visit another route, and see the same list update.
-      </p>
-      <div className="summary-grid">
-        <article><strong>{products.length}</strong><span>Products</span></article>
-        <article><strong>{outOfStockCount}</strong><span>Out of stock</span></article>
+    <section className="home-page">
+      <div className= "overview-banner">
+        <img src="https://i.pinimg.com/736x/b8/ee/ed/b8eeed64f7af5d099945c89d0ab0b457.jpg" alt="" />
+
       </div>
-      <Link className="primary-link" to="/add-product">Add a product</Link>
+
+      <h1>Korean Beauty Products</h1>
+
+      <p className="intro-text">
+        Manage your Korean beauty inventory, track product availability,and monitor daily sales.
+      </p>
+
+      <div className="summary-grid">
+        <article>
+          <span>Total Products</span>
+          <strong>{products.length}</strong>
+        </article>
+
+        <article>
+          <span>Daily Sales</span>
+          <strong>$120</strong>
+        </article>
+        <article>
+           <span>In Stock</span>
+          <strong>{inStockCount}</strong>
+        </article>
+        <article>
+          <span>Out of Stock</span>
+          <strong>{outOfStockCount}</strong>
+        </article>
+        <div className="overview-actions">
+  <a href="/add-product" className="add-product-button">
+    + Add a product
+  </a>
+</div>
+
+      </div>
+
     </section>
   )
 }
