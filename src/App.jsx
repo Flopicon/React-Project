@@ -12,6 +12,7 @@ import UserPage from './pages/UserPage.jsx'
 import MainLayout from './layouts/MainLayout.jsx'
 import ShopLayout from './layouts/ShopLayout.jsx'
 
+
 function App() {
   // State is data that can change while the app is open.
   const [products, setProducts] = useState(starterProducts)
@@ -26,6 +27,7 @@ function App() {
   }
 
   return (
+<<<<<<< HEAD
     <Routes>
       {/* Main / Admin Layout with Sidebar */}
       <Route element={<MainLayout />}>
@@ -46,6 +48,33 @@ function App() {
         <Route index element={<UserPage />} />
       </Route>
     </Routes>
+=======
+    <div className={isSidebarCollapsed ? 'app-shell sidebar-collapsed' : 'app-shell'}>
+      <Navigation
+        isCollapsed={isSidebarCollapsed}
+        onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+      />
+      <section className="app-workspace">
+
+        <main className="page-content" id="main-content">
+          <p className="breadcrumb">Inventory <span>/</span> {pageName}</p>
+          <div className="content-surface">
+               <Routes>
+              <Route path="/" element={<HomePage products={products} />} />
+              <Route path="/products" element={<ProductsPage products={products} />} />
+              <Route path="/add-product" element={<AddProductPage onAddProduct={addProduct} />} />
+              <Route path="/team" element={<TeamLayout />}>
+                <Route index element={<p>Select Team 1 or Team 2 from the sidebar.</p>} />
+                <Route path="team-1" element={<TeamOnePage />} />
+                <Route path="team-2" element={<TeamTwoPage />} />
+              </Route>
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </div>
+        </main>
+      </section>
+    </div>
+>>>>>>> 0dda7dc (New)
   )
 }
 
