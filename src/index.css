@@ -4,33 +4,13 @@
 
 body {
   margin: 0;
-  padding: 0;
-  min-width: 320px;
-<<<<<<< HEAD
-  color: #172b3a;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   background: #f5f7fa;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-=======
-  color: #332a2d;
-  background: #fcf9fa;
-  font-family: Arial, sans-serif;
->>>>>>> 0dda7dc (New)
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  color: #1f2937;
 }
 
 a {
   color: inherit;
-<<<<<<< HEAD
-  text-decoration: none;
-}
-
-/* Nav container & Brand styling */
-.nav-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-=======
 }
 
 button,
@@ -72,7 +52,6 @@ input:focus-visible {
 
 .app-shell.sidebar-collapsed {
   grid-template-columns: 76px minmax(0, 1fr);
->>>>>>> 0dda7dc (New)
 }
 
 .brand {
@@ -98,12 +77,6 @@ input:focus-visible {
 .brand-mark img {
   display: grid;
   width: 30px;
-<<<<<<< HEAD
-  min-width: 30px;
-  height: 30px;
-  place-items: center;
-  border-radius: 6px;
-=======
   min-width: 32px;
   height: 32px;
   place-items: center;
@@ -137,7 +110,6 @@ input:focus-visible {
 }
 
 .sidebar-nav a.active {
->>>>>>> 0dda7dc (New)
   background: #1677ff;
   color: #ffffff;
   font-weight: 800;
@@ -169,11 +141,6 @@ input:focus-visible {
   background: #52c41a;
 }
 
-<<<<<<< HEAD
-/* Custom card hover transitions */
-.product-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-=======
 .skip-link {
   position: absolute;
   left: -999px;
@@ -258,20 +225,31 @@ h1 {
 }
 
 .summary-grid {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  width: 100%;
-  margin: 28px 0;
+  gap: 16px;
+  margin-top: 24px;
 }
 
-.summary-grid article {
-  width: 100%;
-  height: 100px;
-  border: 2px solid #b7ecf0;
-  border-radius: 20px;
-  background: #ffffff;
-  padding: 20px;
->>>>>>> 0dda7dc (New)
+.summary-card {
+  min-height: 105px;
+  padding: 24px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.summary-card span {
+  font-size: 15px;
+  color: #475569;
+}
+
+.summary-card strong {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
 }
 .overview-actions {
   display: flex;
@@ -299,10 +277,6 @@ h1 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-<<<<<<< HEAD
-/* Mobile optimizations */
-@media (max-width: 768px) {
-=======
 .summary-grid span {
   color: #475467;
 }
@@ -447,7 +421,6 @@ input {
     padding: 20px 12px;
   }
 
->>>>>>> 0dda7dc (New)
   .content-surface {
     padding: 16px !important;
   }
