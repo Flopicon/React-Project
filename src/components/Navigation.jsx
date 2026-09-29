@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router'
 import { Menu } from 'antd'
+
 import {
   AppstoreOutlined,
   HomeOutlined,
@@ -8,6 +9,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+import LOTUSLogo from '/src/assets/lotus.png'
 
 function Navigation({ isCollapsed }) {
   const location = useLocation()
@@ -70,8 +72,10 @@ function Navigation({ isCollapsed }) {
   return (
     <div className="nav-container">
       <div className="brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-        <span className="brand-mark">S</span>
-        {!isCollapsed && <span className="nav-label">Stock Starter</span>}
+        <span className="brand-mark">
+          <img src={LOTUSLogo} width={30} alt="" />
+        </span>
+        {!isCollapsed && <span className="nav-label">Prettier Beauty</span>}
       </div>
       <Menu
         theme="dark"
