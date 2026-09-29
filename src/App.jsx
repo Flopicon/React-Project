@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Route, Routes, useLocation } from 'react-router'
+import { Route, Routes } from 'react-router'
 import { starterProducts } from './data/products.js'
-import Navigation from './components/Navigation.jsx'
 import HomePage from './pages/HomePage.jsx'
 import ProductsPage from './pages/ProductsPage.jsx'
 import AddProductPage from './pages/AddProductPage.jsx'
@@ -9,22 +8,14 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import TeamOnePage from './pages/TeamOnePage.jsx'
 import TeamTwoPage from './pages/TeamTwoPage.jsx'
 import TeamLayout from './pages/TeamLayout.jsx'
+import UserPage from './pages/UserPage.jsx'
+import MainLayout from './layouts/MainLayout.jsx'
+import ShopLayout from './layouts/ShopLayout.jsx'
 
 
 function App() {
   // State is data that can change while the app is open.
   const [products, setProducts] = useState(starterProducts)
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-  const location = useLocation()
-  const pageNames = {
-    '/': 'Overview',
-    '/products': 'Products',
-    '/add-product': 'Add product',
-    '/team': 'Team',
-    '/team/team-1': 'Team / Team 1',
-    '/team/team-2': 'Team / Team 2',
-  }
-  const pageName = pageNames[location.pathname] || 'Page not found'
 
   // useEffect runs after React updates the page.
   useEffect(() => {
@@ -32,7 +23,7 @@ function App() {
   }, [products.length])
 
   function addProduct(newProduct) {
-    setProducts([...products, newProduct])
+    setProducts((prevProducts) => [...prevProducts, newProduct])
   }
 
   return (

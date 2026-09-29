@@ -37,11 +37,6 @@ function Navigation({ isCollapsed }) {
       label: 'Users',
     },
     {
-      key:'/admin',
-      icon:<PlusCircleOutlined />,
-      label:'Admin'
-    },
-    {
       key: '/shop',
       icon: <ShopOutlined />,
       label: 'Shop',

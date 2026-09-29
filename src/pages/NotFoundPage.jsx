@@ -1,12 +1,21 @@
-import { Link } from 'react-router'
+import { useNavigate } from 'react-router'
+import { Result, Button } from 'antd'
+import { HomeOutlined } from '@ant-design/icons'
 
 function NotFoundPage() {
+  const navigate = useNavigate()
+
   return (
-    <section>
-      <p className="eyebrow">Route not found</p>
-      <h1>That page does not exist.</h1>
-      <Link className="primary-link" to="/">Go home</Link>
-    </section>
+    <Result
+      status="404"
+      title="404"
+      subTitle="Sorry, the page you visited does not exist."
+      extra={
+        <Button type="primary" icon={<HomeOutlined />} onClick={() => navigate('/')}>
+          Back Home
+        </Button>
+      }
+    />
   )
 }
 

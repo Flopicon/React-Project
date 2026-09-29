@@ -1,14 +1,225 @@
-import ProductForm from '../components/ProductForm.jsx'
+// import { Typography, Card, Tag } from 'antd'
+// import { FormOutlined } from '@ant-design/icons'
+// import ProductForm from '../components/ProductForm.jsx'
+
+// const { Title, Paragraph } = Typography
+
+// function AddProductPage({ onAddProduct }) {
+//   return (
+//     <div className="add-product-page">
+//       <div style={{ marginBottom: 20 }}>
+//         <Tag color="purple" icon={<FormOutlined />} style={{ marginBottom: 8 }}>
+//           useState & Events
+//         </Tag>
+//         <Title level={2} style={{ margin: '4px 0 8px 0' }}>
+//           Add a Product
+//         </Title>
+//         <Paragraph type="secondary" style={{ margin: 0, maxWidth: 600 }}>
+//           Fill in the details below. Submitting the form updates the shared product state across the application.
+//         </Paragraph>
+//       </div>
+
+//       <Card variant="borderless" style={{ background: '#fafafa', borderRadius: 12, border: '1px solid #f0f0f0' }}>
+//         <ProductForm onAddProduct={onAddProduct} />
+//       </Card>
+//     </div>
+//   )
+// }
+
+// export default AddProductPage
+
+
+
+// import React from "react";
+// import { Form, Input, InputNumber, Button, Card, Space, message } from "antd";
+// import { ArrowLeftOutlined } from "@ant-design/icons";
+
+// function AddProductPage({ onAddProduct }) {
+//   const [form] = Form.useForm();
+
+//   const onFinish = (values) => {
+//     const newProduct = {
+//       key: Date.now(),
+//       id: Date.now(),
+//       category_name: values.category_name,
+//       name: values.name,
+//       stock: values.stock,
+//       description: values.description || "No description provided",
+//       price: values.price,
+//       product_image: values.product_image || "/image/Skin 1004 Madagascar Centella Ampoule.jpg",
+//       skin_type: values.skin_type || "All Skin Type",
+//       created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
+//     };
+
+//     if (onAddProduct) {
+//       onAddProduct(newProduct);
+//     }
+//     message.success("Product successfully created!");
+//     window.location.href = "/products";
+//   };
+
+//   return (
+//     <div style={{ padding: "32px", display: "flex", justifyContent: "center" }}>
+//       {/* Inline Keyframe Animation Style */}
+//       <style>
+//         {`
+//           @keyframes modalSlideUp {
+//             0% {
+//               opacity: 0;
+//               transform: translateY(30px) scale(0.98);
+//             }
+//             100% {
+//               opacity: 1;
+//               transform: translateY(0) scale(1);
+//             }
+//           }
+//           .animated-card {
+//             animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+//           }
+//         `}
+//       </style>
+
+//       <Card 
+//         className="animated-card"
+//         title={
+//           <Space>
+//             <Button 
+//               icon={<ArrowLeftOutlined />} 
+//               type="text" 
+//               onClick={() => { window.location.href = "/products"; }} 
+//             />
+//             <span>Add New Product</span>
+//           </Space>
+//         } 
+//         bordered={false} 
+//         style={{ width: "100%", maxWidth: "420px", boxShadow: "0 8px 24px rgba(0,0,0,0.08)", borderRadius: "12px" }}
+//       >
+//         <Form form={form} layout="vertical" onFinish={onFinish}>
+//           <Form.Item name="name" label="Product Name" rules={[{ required: true, message: "Please input product name!" }]}>
+//             <Input placeholder="Enter product name" />
+//           </Form.Item>
+
+//           <Form.Item name="price" label="Price ($)" rules={[{ required: true, message: "Please input price!" }]}>
+//             <InputNumber style={{ width: "100%" }} placeholder="0.00" />
+//           </Form.Item>
+
+//           <Form.Item name="category_name" label="Category Name" rules={[{ required: true, message: "Please input category name!" }]}>
+//             <Input placeholder="e.g. Toner, Serum, Cleanser" />
+//           </Form.Item>
+
+//           <Form.Item name="stock" label="Quantity / Stock" rules={[{ required: true, message: "Please input stock quantity!" }]}>
+//             <InputNumber style={{ width: "100%" }} placeholder="Enter quantity" />
+//           </Form.Item>
+
+//           <Form.Item name="skin_type" label="Skin Type">
+//             <Input placeholder="e.g. Sensitive Skin, All Skin Type" />
+//           </Form.Item>
+
+//           <Form.Item name="description" label="Description">
+//             <Input.TextArea rows={2} placeholder="Enter product description" />
+//           </Form.Item>
+
+//           <Form.Item name="product_image" label="Image Path">
+//             <Input placeholder="e.g. /image/filename.jpg" />
+//           </Form.Item>
+
+//           <Form.Item style={{ textAlign: "right", marginBottom: 0, marginTop: "16px" }}>
+//             <Space>
+//               <Button onClick={() => form.resetFields()}>Reset</Button>
+//               <Button type="primary" htmlType="submit">Save Product</Button>
+//             </Space>
+//           </Form.Item>
+//         </Form>
+//       </Card>
+//     </div>
+//   );
+// }
+
+// export default AddProductPage;
+
+import React, { useState } from "react";
+import { Form, Input, InputNumber, Button, Card, Space, Modal, message } from "antd";
 
 function AddProductPage({ onAddProduct }) {
+  const [form] = Form.useForm();
+  const [isModalOpen, setIsModalOpen] = useState(true); // Opens automatically when visiting /add-product
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    window.location.href = "/products"; // Redirects back if closed
+  };
+
+  const onFinish = (values) => {
+    const newProduct = {
+      key: Date.now(),
+      id: Date.now(),
+      category_name: values.category_name,
+      name: values.name,
+      stock: values.stock,
+      description: values.description || "No description provided",
+      price: values.price,
+      product_image: values.product_image || "/image/Skin 1004 Madagascar Centella Ampoule.jpg",
+      skin_type: values.skin_type || "All Skin Type",
+      created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
+    };
+
+    if (onAddProduct) {
+      onAddProduct(newProduct);
+    }
+    message.success("Product successfully created!");
+    window.location.href = "/products";
+  };
+
   return (
-    <section className="form-section">
-      <p className="eyebrow">useState and events</p>
-      <h1>Add a product</h1>
-      <p className="page-description">Type into each controlled input, then submit the form to update the product state in App.</p>
-      <ProductForm onAddProduct={onAddProduct} />
-    </section>
-  )
+    <div style={{ padding: "32px", display: "flex", justifyContent: "center", minHeight: "80vh", alignItems: "center" }}>
+      <Modal
+        title="Add Product"
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+        width={460}
+        centered
+        maskClosable={false}
+      >
+        <Form form={form} layout="vertical" onFinish={onFinish} style={{ marginTop: "12px" }}>
+          <Form.Item name="name" label="Product Name" rules={[{ required: true, message: "Please input product name!" }]}>
+            <Input placeholder="Enter product name" />
+          </Form.Item>
+
+          <Form.Item name="price" label="Price ($)" rules={[{ required: true, message: "Please input price!" }]}>
+            <InputNumber style={{ width: "100%" }} placeholder="0.00" />
+          </Form.Item>
+
+          <Form.Item name="category_name" label="Category Name" rules={[{ required: true, message: "Please input category name!" }]}>
+            <Input placeholder="e.g. Toner, Serum, Cleanser" />
+          </Form.Item>
+
+          <Form.Item name="stock" label="Quantity / Stock" rules={[{ required: true, message: "Please input stock quantity!" }]}>
+            <InputNumber style={{ width: "100%" }} placeholder="Enter quantity" />
+          </Form.Item>
+
+          <Form.Item name="skin_type" label="Skin Type">
+            <Input placeholder="e.g. Sensitive Skin, All Skin Type" />
+          </Form.Item>
+
+          <Form.Item name="description" label="Description">
+            <Input.TextArea rows={2} placeholder="Enter product description" />
+          </Form.Item>
+
+          <Form.Item name="product_image" label="Image Path">
+            <Input placeholder="e.g. /image/filename.jpg" />
+          </Form.Item>
+
+          <Form.Item style={{ textAlign: "right", marginBottom: 0, marginTop: "16px" }}>
+            <Space>
+              <Button onClick={() => form.resetFields()}>Reset</Button>
+              <Button type="primary" htmlType="submit">Save Product</Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Modal>
+    </div>
+  );
 }
 
-export default AddProductPage
+export default AddProductPage;
