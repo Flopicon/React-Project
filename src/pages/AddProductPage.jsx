@@ -30,15 +30,18 @@
 
 
 import React, { useState } from "react";
-import { Form, Input, InputNumber, Button, Card, Space, Modal, message } from "antd";
+import { Form, Input, InputNumber, Button, Space, Modal, message } from "antd";
+// import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 function AddProductPage({ onAddProduct }) {
   const [form] = Form.useForm();
-  const [isModalOpen, setIsModalOpen] = useState(true); // Opens automatically when visiting /add-product
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const navigate = useNavigate();
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    window.location.href = "/products"; // Redirects back if closed
+    navigate("/products");
   };
 
   const onFinish = (values) => {
@@ -59,7 +62,7 @@ function AddProductPage({ onAddProduct }) {
       onAddProduct(newProduct);
     }
     message.success("Product successfully created!");
-    window.location.href = "/products";
+    navigate("/products");
   };
 
   return (
