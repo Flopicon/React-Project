@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Navigate, Route, Routes } from 'react-router'
+// import { Navigate, Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { starterProducts } from './data/products.js'
 
