@@ -193,25 +193,6 @@ input:focus-visible {
   gap: 6px;
 }
 
-.window-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.red {
-  background: #f04438;
-}
-
-.yellow {
-  background: #fdb022;
-}
-
-.green {
-  background: #4caf50;
-}
-
 .skip-link {
   position: absolute;
   left: -999px;
@@ -322,7 +303,7 @@ h1 {
 
 .overview-banner {
   width: 100%;
-  height: 320px;
+  height: 350px;
   overflow: hidden;
   margin-bottom: 28px;
   border-radius: 12px;
@@ -332,7 +313,7 @@ h1 {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit:unset;
 }
 .summary-grid,
 .product-grid {
@@ -678,6 +659,7 @@ input {
     border-radius: 6px;
     background: #f8fafc;
 }
+
 }
 
 @media (max-width: 600px) {
@@ -741,11 +723,5 @@ input {
   .content-surface {
     padding: 16px !important;
   }
-  .login-page {
-  width: 100%;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+
 }

@@ -1,14 +1,22 @@
-import { useState } from 'react'
-import { Modal } from 'antd'
-import LoginForm from '../components/LoginForm.jsx'
-import loginBg from '/src/assets/login-bg.png'
+import { useState } from "react";
+import { Modal } from "antd";
+import LoginForm from "../components/LoginForm.jsx";
+import loginBg from "../assets/login.png";
+
 function LoginPage({ onLogin }) {
-  const [isLoginOpen, setIsLoginOpen] = useState(true)
+  const [isLoginOpen, setIsLoginOpen] = useState(true);
 
   return (
     <div
       className="login-page"
-      style={{ backgroundImage: `url(${loginBg})` }}
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        backgroundImage: `url(${loginBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       <Modal
         title="Log in"
@@ -16,12 +24,12 @@ function LoginPage({ onLogin }) {
         onCancel={() => setIsLoginOpen(false)}
         footer={null}
         centered
-        mask={{ enabled: false }}
+        mask={false}
       >
         <LoginForm onLogin={onLogin} />
       </Modal>
     </div>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

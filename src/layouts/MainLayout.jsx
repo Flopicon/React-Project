@@ -72,7 +72,7 @@ function MainLayout() {
         </Content>
 
         <Footer style={{ textAlign: 'center', color: '#8c8c8c', padding: '16px 50px' }}>
-          Stock Starter © {new Date().getFullYear()} — Built with React & Ant Design
+          Product from korea © {new Date().getFullYear()} — Use it to make your skin smooth and bright
         </Footer>
       </Layout>
     </Layout>

@@ -9,7 +9,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import LOTUSLogo from '/src/assets/lotus.png'
+import Logomakeup from '/src/assets/makeup.png'
 
 function Navigation({ isCollapsed }) {
   const location = useLocation()
@@ -73,9 +73,9 @@ function Navigation({ isCollapsed }) {
     <div className="nav-container">
       <div className="brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <span className="brand-mark">
-          <img src={LOTUSLogo} width={30} alt="" />
+          <img src={Logomakeup} width={30} alt="" />
         </span>
-        {!isCollapsed && <span className="nav-label">Prettier Beauty</span>}
+        {!isCollapsed && <span className="nav-label">Prettier Cosmestic </span>}
       </div>
       <Menu
         theme="dark"
