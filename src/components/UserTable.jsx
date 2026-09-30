@@ -19,7 +19,7 @@ import {
 } from '@ant-design/icons'
 
 function UserTable() {
-  const API_URL = 'http://127.0.0.1:8000/api/users'
+  const API_URL = `${import.meta.env.VITE_API_URL}/users`
   const { message } = App.useApp()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)

@@ -8,9 +8,6 @@ import HomePage from './pages/HomePage.jsx'
 import ProductsPage from './pages/ProductsPage.jsx'
 import AddProductPage from './pages/AddProductPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
-import TeamOnePage from './pages/TeamOnePage.jsx'
-import TeamTwoPage from './pages/TeamTwoPage.jsx'
-import TeamLayout from './pages/TeamLayout.jsx'
 import UserPage from './pages/UserPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import MainLayout from './layouts/MainLayout.jsx'
@@ -115,30 +112,6 @@ function App() {
           path="/users"
           element={<UserPage />}
         />
-
-        <Route
-          path="/team"
-          element={<TeamLayout />}
-        >
-          <Route
-            index
-            element={
-              <p>
-                Select Team 1 or Team 2 from the sidebar.
-              </p>
-            }
-          />
-
-          <Route
-            path="team-1"
-            element={<TeamOnePage />}
-          />
-
-          <Route
-            path="team-2"
-            element={<TeamTwoPage />}
-          />
-        </Route>
 
       </Route>
 
