@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Navigate, Route, Routes } from 'react-router'
+// import { Navigate, Route, Routes } from 'react-router'
+// import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { starterProducts } from './data/products.js'
 
@@ -12,9 +13,9 @@ import TeamTwoPage from './pages/TeamTwoPage.jsx'
 import TeamLayout from './pages/TeamLayout.jsx'
 import UserPage from './pages/UserPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
-
 import MainLayout from './layouts/MainLayout.jsx'
 import ShopLayout from './layouts/ShopLayout.jsx'
+import { Navigate, Route, Routes } from 'react-router'
 
 
 function App() {

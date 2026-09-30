@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Outlet, useLocation, Link } from 'react-router'
+// import { Outlet, useLocation, Link } from 'react-router-dom'
 import { Layout, Breadcrumb, Typography } from 'antd'
 import Navigation from '../components/Navigation.jsx'
+import { Link, Outlet, useLocation } from 'react-router'
 
 const { Header, Content, Sider, Footer } = Layout
 const { Text } = Typography

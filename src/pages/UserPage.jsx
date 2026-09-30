@@ -8,12 +8,14 @@ import UserTable from "../components/UserTable"
 // const { Title, Paragraph } = Typography
 
 function UserPage() {
-  // const navigate = useNavigate()
-  
-
   return (
     <div className="products-page">
-      <h1>Hello</h1>
+      <div style={{ marginBottom: 24 }}>
+        <h2 style={{ margin: '4px 0 8px' }}>Users</h2>
+        <p style={{ color: '#8c8c8c', margin: 0 }}>
+          Manage user accounts and permissions from one place.
+        </p>
+      </div>
       <UserTable />
     </div>
   )

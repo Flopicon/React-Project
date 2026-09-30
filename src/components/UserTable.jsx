@@ -4,7 +4,6 @@ import {
   App,
   Space,
   Modal,
-  Typography,
   Form,
   Input,
   Select,
@@ -13,11 +12,14 @@ import {
   Descriptions,
   Tag,
 } from 'antd'
-
-const { Link } = Typography
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+} from '@ant-design/icons'
 
 function UserTable() {
-  const API_URL = 'http://127.0.0.1:8000/api/users'
+  const API_URL = import.meta.env +'/users'
   const { message } = App.useApp()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
@@ -93,9 +95,23 @@ function UserTable() {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
-        <Space>
-          <Link onClick={() => handleView(record)}>View</Link>
-          <Link onClick={() => handleUpdate(record)}>Update</Link>
+        <Space size="middle">
+          <Button
+            icon={<EyeOutlined />}
+            size="small"
+            type="link"
+            onClick={() => handleView(record)}
+          >
+            View
+          </Button>
+          <Button
+            icon={<EditOutlined />}
+            size="small"
+            type="link"
+            onClick={() => handleUpdate(record)}
+          >
+            Update
+          </Button>
           <Popconfirm
             title="Delete this user?"
             description={`Are you sure you want to delete ${record.name}?`}
@@ -104,7 +120,14 @@ function UserTable() {
             okButtonProps={{ danger: true }}
             onConfirm={() => handleDelete(record)}
           >
-            <Link type="danger">Delete</Link>
+            <Button
+              icon={<DeleteOutlined />}
+              size="small"
+              type="link"
+              danger
+            >
+              Delete
+            </Button>
           </Popconfirm>
         </Space>
       ),

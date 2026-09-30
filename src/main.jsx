@@ -1,11 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router'
+// import { BrowserRouter } from 'react-router-dom'
 import { ConfigProvider, App as AntdApp } from 'antd'
 import './index.css'
 import App from './App.jsx'
+import { BrowserRouter } from 'react-router'
 
-// BrowserRouter lets the URL choose which page React shows.
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ConfigProvider
@@ -23,5 +23,5 @@ createRoot(document.getElementById('root')).render(
         </BrowserRouter>
       </AntdApp>
     </ConfigProvider>
-  </StrictMode>,
+  </StrictMode>
 )
