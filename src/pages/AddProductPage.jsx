@@ -31,8 +31,9 @@
 
 import React, { useState } from "react";
 import { Form, Input, InputNumber, Button, Space, Modal, message } from "antd";
+import { useNavigate } from "react-router";
 // import { useNavigate } from "react-router-dom";
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 function AddProductPage({ onAddProduct }) {
   const [form] = Form.useForm();

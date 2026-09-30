@@ -1,4 +1,5 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+// import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router'
 import { Menu } from 'antd'
 
 import {
@@ -10,6 +11,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import Logomakeup from '/src/assets/makeup.png'
+
 
 function Navigation({ isCollapsed }) {
   const location = useLocation()
