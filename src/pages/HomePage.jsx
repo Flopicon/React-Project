@@ -1,26 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react'
 
-function HomePage({ products }) {
+const API_URL = `${import.meta.env.VITE_API_URL}/product`
 
-  const [dailySales, setdailySales] = useState(120);
+function HomePage() {
+  const [products, setProducts] = useState([])
+  const [dailySales] = useState(120)
+  const [loading, setLoading] = useState(true)
 
-  const outOfStockCount = products.filter(
-    (product) => product.quantity === 0,
-  ).length;
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${API_URL}?per_page=1000`)
 
-  const inStockCount = products.filter(
-    (product) => product.quantity > 0,
-  ).length;
-  function HomePage({ products }) {
-    const outOfStockCount = products.filter(
-      (product) => product.quantity === 0,
-    ).length;
+        if (!response.ok) {
+          throw new Error(`HTTP Error: ${response.status}`)
+        }
 
-    const inStockCount = products.filter(
-      (product) => product.quantity > 0,
-    ).length;
+        const result = await response.json()
+        setProducts(Array.isArray(result) ? result : result.data || [])
+      } catch (error) {
+        console.error('Failed to fetch products:', error)
+        setProducts([])
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  }
+    fetchProducts()
+  }, [])
+
+  const productIds = new Set(
+    products
+      .map((product) => product.id)
+      .filter((id) => id !== undefined && id !== null),
+  )
+  const inStockCount = products.filter((product) => Number(product.stock) > 0).length
+  const outOfStockCount = products.filter((product) => Number(product.stock) === 0).length
 
   return (
     <section className="home-page">
@@ -41,7 +56,7 @@ function HomePage({ products }) {
       <div className="summary-grid">
         <article className="summary-card total-products">
           <span>Total Products</span>
-          <strong>{products.length}</strong>
+          <strong>{loading ? '...' : productIds.size}</strong>
         </article>
 
         <article className="summary-card daily-sales">
@@ -51,12 +66,12 @@ function HomePage({ products }) {
 
         <article className="summary-card in-stock">
           <span>In Stock</span>
-          <strong>{inStockCount}</strong>
+          <strong>{loading ? '...' : inStockCount}</strong>
         </article>
 
         <article className="summary-card out-of-stock">
           <span>Out of Stock</span>
-          <strong>{outOfStockCount}</strong>
+          <strong>{loading ? '...' : outOfStockCount}</strong>
         </article>
       </div>
     </section>

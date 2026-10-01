@@ -5,9 +5,7 @@ import { Menu } from 'antd'
 import {
   AppstoreOutlined,
   HomeOutlined,
-  PlusCircleOutlined,
   ShopOutlined,
-  TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
 import Logomakeup from '/src/assets/makeup.png'
@@ -29,11 +27,6 @@ function Navigation({ isCollapsed }) {
       label: 'Products',
     },
     {
-      key: '/add-product',
-      icon: <PlusCircleOutlined />,
-      label: 'Add product',
-    },
-    {
       key: '/users',
       icon: <UserOutlined />,
       label: 'Users',
@@ -42,23 +35,6 @@ function Navigation({ isCollapsed }) {
       key: '/shop',
       icon: <ShopOutlined />,
       label: 'Shop',
-    },
-    {
-      key: 'team-group',
-      icon: <TeamOutlined />,
-      label: 'Team',
-      children: [
-        {
-          key: '/team/team-1',
-          icon: <UserOutlined />,
-          label: 'Team 1',
-        },
-        {
-          key: '/team/team-2',
-          icon: <UserOutlined />,
-          label: 'Team 2',
-        },
-      ],
     },
   ]
 
@@ -83,7 +59,6 @@ function Navigation({ isCollapsed }) {
         theme="dark"
         mode="inline"
         selectedKeys={[activeKey]}
-        defaultOpenKeys={['team-group']}
         items={menuItems}
         onClick={handleMenuClick}
         style={{ borderRight: 0, background: 'transparent' }}

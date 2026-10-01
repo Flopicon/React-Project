@@ -16,9 +16,6 @@ function MainLayout() {
     '/products': ['Products'],
     '/users': ['Users'],
     '/add-product': ['Add Product'],
-    '/team': ['Team'],
-    '/team/team-1': ['Team', 'Team 1'],
-    '/team/team-2': ['Team', 'Team 2'],
   }
 
   const currentBreadcrumbs = breadcrumbMap[location.pathname] || ['Overview']
@@ -46,7 +43,7 @@ function MainLayout() {
           position: 'sticky',
           top: 0,
           left: 0,
-          background: '#001529',
+          background: '#090029',
         }}
       >
         <Navigation isCollapsed={collapsed} />

@@ -367,7 +367,9 @@ import { PlusOutlined } from '@ant-design/icons'
 const { Link, Title } = Typography
 
 function ProductsPage() {
-  const API_URL = 'http://127.0.0.1:8000/api/product'
+  const API_BASE_URL = import.meta.env.VITE_API_URL
+  const API_URL = `${API_BASE_URL}/product`
+  const API_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, '')
   const { message } = App.useApp()
 
   // State Management
@@ -396,9 +398,9 @@ function ProductsPage() {
       return imagePath
     }
     if (imagePath.startsWith('/')) {
-      return `http://127.0.0.1:8000${imagePath}`
+      return `${API_ORIGIN}${imagePath}`
     }
-    return `http://127.0.0.1:8000/storage/${imagePath}`
+    return `${API_ORIGIN}/storage/${imagePath}`
   }
 
   // ---------------------------------------------------------------------------
