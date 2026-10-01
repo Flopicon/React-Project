@@ -43,7 +43,7 @@ function MainLayout() {
           position: 'sticky',
           top: 0,
           left: 0,
-          background: '#001529',
+          background: '#090029',
         }}
       >
         <Navigation isCollapsed={collapsed} />

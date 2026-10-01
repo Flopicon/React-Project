@@ -15,9 +15,14 @@ import {
   Tag,
   Image,
 } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+  PlusOutlined,
+} from '@ant-design/icons'
 
-const { Link, Title } = Typography
+const { Title } = Typography
 
 function ProductsPage() {
   const API_BASE_URL = ' http://127.0.0.1:8000/api'
@@ -254,8 +259,22 @@ function ProductsPage() {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Link onClick={() => handleView(record)}>View</Link>
-          <Link onClick={() => handleUpdate(record)}>Update</Link>
+          <Button
+            icon={<EyeOutlined />}
+            size="small"
+            type="link"
+            onClick={() => handleView(record)}
+          >
+            View
+          </Button>
+          <Button
+            icon={<EditOutlined />}
+            size="small"
+            type="link"
+            onClick={() => handleUpdate(record)}
+          >
+            Update
+          </Button>
           <Popconfirm
             title="Delete this product?"
             description={`Are you sure you want to delete "${record.name}"?`}
@@ -264,7 +283,9 @@ function ProductsPage() {
             okButtonProps={{ danger: true }}
             onConfirm={() => handleDelete(record)}
           >
-            <Link type="danger">Delete</Link>
+            <Button icon={<DeleteOutlined />} size="small" type="link" danger>
+              Delete
+            </Button>
           </Popconfirm>
         </Space>
       ),
