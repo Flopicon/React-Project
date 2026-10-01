@@ -16,6 +16,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   EyeOutlined,
+  PlusOutlined,
 } from '@ant-design/icons'
 
 function UserTable() {
@@ -25,8 +26,11 @@ function UserTable() {
   const [loading, setLoading] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
   const [editingUser, setEditingUser] = useState(null)
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [form] = Form.useForm()
+  const [addForm] = Form.useForm()
   const [updating, setUpdating] = useState(false)
+  const [adding, setAdding] = useState(false)
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
@@ -72,6 +76,37 @@ function UserTable() {
     } catch (error) {
       console.error('Failed to delete user:', error)
       message.error('Failed to delete user')
+    }
+  }
+
+  const handleCreateSubmit = async (values) => {
+    setAdding(true)
+
+    try {
+      const formData = new FormData()
+      formData.append('name', values.name)
+      formData.append('email', values.email)
+      formData.append('password', values.password)
+      formData.append('role', values.role)
+
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error('Create request failed')
+      }
+
+      message.success('User added successfully')
+      setIsAddModalOpen(false)
+      addForm.resetFields()
+      fetchUsers(pagination.current, pagination.pageSize)
+    } catch (error) {
+      console.error('Failed to add user:', error)
+      message.error('Failed to add user')
+    } finally {
+      setAdding(false)
     }
   }
 
@@ -238,6 +273,16 @@ function UserTable() {
 
   return (
     <>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => setIsAddModalOpen(true)}
+        >
+          Add User
+        </Button>
+      </div>
+
       <Table
         rowKey="id"
         columns={columns}
@@ -246,6 +291,77 @@ function UserTable() {
         loading={loading}
         onChange={handleTableChange}
       />
+
+      <Modal
+        title="Add User"
+        open={isAddModalOpen}
+        onCancel={() => {
+          setIsAddModalOpen(false)
+          addForm.resetFields()
+        }}
+        footer={null}
+        centered
+      >
+        <Form
+          form={addForm}
+          layout="vertical"
+          onFinish={handleCreateSubmit}
+          style={{ marginTop: 12 }}
+        >
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: 'Please enter the name' }]}
+          >
+            <Input placeholder="Enter full name" />
+          </Form.Item>
+
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Please enter the email' },
+              { type: 'email', message: 'Please enter a valid email' },
+            ]}
+          >
+            <Input placeholder="Enter email address" />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              { required: true, message: 'Please enter a password' },
+              { min: 6, message: 'Password must be at least 6 characters' },
+            ]}
+          >
+            <Input.Password placeholder="Enter password" />
+          </Form.Item>
+
+          <Form.Item
+            label="Role"
+            name="role"
+            initialValue="user"
+            rules={[{ required: true, message: 'Please select a role' }]}
+          >
+            <Select
+              options={[
+                { value: 'user', label: 'User' },
+                { value: 'admin', label: 'Admin' },
+              ]}
+            />
+          </Form.Item>
+
+          <Form.Item style={{ textAlign: 'right', marginBottom: 0, marginTop: 16 }}>
+            <Space>
+              <Button onClick={() => addForm.resetFields()}>Reset</Button>
+              <Button type="primary" htmlType="submit" loading={adding}>
+                Save User
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Modal>
 
       <Modal
         title="User Details"

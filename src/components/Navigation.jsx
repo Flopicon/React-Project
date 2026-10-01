@@ -8,7 +8,7 @@ import {
   ShopOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import Logomakeup from '/src/assets/makeup.png'
+import Logomakeup from '../assets/makeup.png'
 
 
 function Navigation({ isCollapsed }) {
