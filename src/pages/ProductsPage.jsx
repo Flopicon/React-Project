@@ -371,8 +371,16 @@ import {
 
 const { Title } = Typography
 
+const productCategories = [
+  { value: 1, label: 'Cleanser' },
+  { value: 2, label: 'Toner' },
+  { value: 3, label: 'Serum' },
+  { value: 5, label: 'Sunscreen' },
+  { value: 8, label: 'Lip Care' },
+]
+
 function ProductsPage() {
-  const API_BASE_URL = import.meta.env.VITE_API_URL
+  const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
   const API_URL = `${API_BASE_URL}/product`
   const API_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, '')
   const { message } = App.useApp()
@@ -466,12 +474,20 @@ function ProductsPage() {
 
   const handleUpdate = (product) => {
     setEditingProduct(product)
+    const categoryName = product.category?.name || product.category_name
+    const categoryId =
+      product.category_id ||
+      product.category?.id ||
+      productCategories.find(
+        (category) => category.label.toLowerCase() === categoryName?.toLowerCase()
+      )?.value
+
     updateForm.setFieldsValue({
       name: product.name || '',
       price: product.price || 0,
       stock: product.stock || 0,
-      category_name: product.category?.name || product.category_name || '',
-      skin_type: product.skin_type || '',
+      category_id: categoryId,
+      skin_type: product.skin_type || 'All Skin Type',
       description: product.description || '',
       product_image: product.product_image || '',
     })
@@ -480,16 +496,23 @@ function ProductsPage() {
   const handleCreateSubmit = async (values) => {
     setSubmitting(true)
     try {
+      const payload = {
+        ...values,
+        skin_type: values.skin_type || 'All Skin Type',
+      }
+
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(payload),
       })
 
       if (!response.ok) {
-        throw new Error('Failed to add product')
+        const errorText = await response.text()
+        console.error('Create failed:', response.status, errorText)
+        throw new Error('Create request failed')
       }
 
       message.success('Product added successfully!')
@@ -508,12 +531,17 @@ function ProductsPage() {
     setSubmitting(true)
 
     try {
+      const payload = {
+        ...values,
+        skin_type: values.skin_type || 'All Skin Type',
+      }
+
       const response = await fetch(`${API_URL}/${editingProduct.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(payload),
       })
 
       if (!response.ok) {
@@ -735,6 +763,7 @@ function ProductsPage() {
           form={addForm}
           layout="vertical"
           onFinish={handleCreateSubmit}
+          initialValues={{ skin_type: 'All Skin Type' }}
           style={{ marginTop: '12px' }}
         >
           <Form.Item
@@ -745,7 +774,7 @@ function ProductsPage() {
             <Input placeholder="Enter product name" />
           </Form.Item>
 
-          <Space style={{ display: 'flex' }} align="baseline">
+          <Space className="product-field-row" style={{ display: 'flex' }} align="baseline">
             <Form.Item
               name="price"
               label="Price ($)"
@@ -765,15 +794,22 @@ function ProductsPage() {
           </Space>
 
           <Form.Item
-            name="category_name"
+            name="category_id"
             label="Category Name"
             rules={[{ required: true, message: 'Please enter category' }]}
           >
-            <Input placeholder="e.g. Toner, Serum, Cleanser" />
+            <Select
+              style={{ width: '100%' }}
+              placeholder="Select a category"
+              options={productCategories}
+              placement="bottomLeft"
+              getPopupContainer={(trigger) => trigger.parentElement}
+            />
           </Form.Item>
 
           <Form.Item name="skin_type" label="Skin Type">
             <Select
+              style={{ width: '100%' }}
               placeholder="Select skin type"
               options={[
                 { value: 'All Skin Type', label: 'All Skin Type' },
@@ -830,7 +866,7 @@ function ProductsPage() {
             <Input />
           </Form.Item>
 
-          <Space style={{ display: 'flex' }} align="baseline">
+          <Space className="product-field-row" style={{ display: 'flex' }} align="baseline">
             <Form.Item
               name="price"
               label="Price ($)"
@@ -850,15 +886,26 @@ function ProductsPage() {
           </Space>
 
           <Form.Item
-            name="category_name"
+            name="category_id"
             label="Category Name"
             rules={[{ required: true, message: 'Please enter category' }]}
           >
-            <Input />
+            <Select
+              style={{ width: '100%' }}
+              placeholder="Select a category"
+              options={productCategories}
+              placement="bottomLeft"
+              getPopupContainer={(trigger) => trigger.parentElement}
+            />
           </Form.Item>
 
-          <Form.Item name="skin_type" label="Skin Type">
+          <Form.Item
+            name="skin_type"
+            label="Skin Type"
+            initialValue="All Skin Type"
+          >
             <Select
+              style={{ width: '100%' }}
               options={[
                 { value: 'All Skin Type', label: 'All Skin Type' },
                 { value: 'Sensitive Skin', label: 'Sensitive Skin' },

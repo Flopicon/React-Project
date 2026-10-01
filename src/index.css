@@ -713,3 +713,49 @@ input {
   }
 
 }
+
+.ant-form-item,
+.ant-form-item-control,
+.ant-form-item-control-input,
+.ant-form-item-control-input-content {
+  min-width: 0;
+}
+
+.ant-form-item-control-input-content > .ant-input,
+.ant-form-item-control-input-content > .ant-input-number,
+.ant-form-item-control-input-content > .ant-select,
+.ant-form-item-control-input-content > .ant-picker,
+.ant-form-item-control-input-content > textarea {
+  max-width: 100%;
+}
+
+.product-field-row {
+  width: 100%;
+  min-width: 0;
+}
+
+.product-field-row .ant-form-item {
+  min-width: 0;
+  width: 100%;
+}
+
+.ant-pagination {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.ant-pagination-options {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ant-pagination-options .ant-select {
+  min-width: 96px;
+  max-width: 100%;
+}
+
+.ant-select-dropdown {
+  max-height: 240px;
+  overflow-y: auto;
+}
