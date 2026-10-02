@@ -17,8 +17,9 @@ const NavigationBar = () => {
   };
 
   const logoStyle = {
-    fontSize: "20px",
-    fontWeight: "600",
+    color:"pink",
+    fontSize: "30px",
+    fontWeight: "800",
   };
 
   const linksStyle = {
