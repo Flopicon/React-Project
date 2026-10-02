@@ -1,111 +1,38 @@
-import { Outlet, useNavigate } from 'react-router'
-import { Layout, Button, Space } from 'antd'
+import { Outlet } from 'react-router'
+import { Layout } from 'antd'
 import NavigationBar from '../components/NavigationBar'
-import {
-  ShopOutlined,
-  DashboardOutlined,
-  ShoppingCartOutlined,
-} from '@ant-design/icons'
+import CustomFooter from '../components/Footer' 
 
-const { Header, Content, Footer } = Layout
+const { Content } = Layout
 
 function ShopLayout() {
-  const navigate = useNavigate()
+  const layoutStyle = {
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    background: '#ffffff',
+  }
+
+  const contentStyle = {
+    paddingTop: '76px', 
+    flex: 1,            
+    width: '100%',
+  }
 
   return (
-    <Layout style={{ minHeight: '100vh', background: '#f8fafc' }}>
-      {/* Top Shop Navigation Header */}
-       <NavigationBar />
-      <Header
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: '#ffffff',
-          padding: '0 32px',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
-          borderBottom: '1px solid #f0f0f0',
-          height: 64,
-        }}
-      >
-        <div
-          onClick={() => navigate('/shop')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            cursor: 'pointer',
-          }}
-        >
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 8,
-              background: '#1677ff',
-              display: 'grid',
-              placeItems: 'center',
-              color: '#fff',
-              fontWeight: 700,
-              fontSize: 18,
-            }}
-          >
-            <ShopOutlined />
-          </div>
-          <span style={{ fontSize: 18, fontWeight: 700, color: '#1f2937' }}>
-            Storefront
-          </span>
-        </div>
+    <Layout style={layoutStyle}>
+      {/* Top Fixed Navigation */}
+      <NavigationBar />
 
-        <Space size="middle">
-          <Button
-            type="text"
-            icon={<DashboardOutlined />}
-            onClick={() => navigate('/')}
-          >
-            Back to Dashboard
-          </Button>
-          <Button
-            type="primary"
-            icon={<ShoppingCartOutlined />}
-          >
-            Cart
-          </Button>
-        </Space>
-      </Header>
-
-      {/* Main Content Area */}
-      <Content
-        style={{
-          padding: '24px 32px',
-          maxWidth: 1280,
-          width: '100%',
-          margin: '0 auto',
-        }}
-      >
+      {/* Main Dynamic Page Content */}
+      <Content style={contentStyle}>
         <Outlet />
       </Content>
 
-      {/* Shop Footer */}
-      <Footer
-        style={{
-          textAlign: 'center',
-          background: '#ffffff',
-          borderTop: '1px solid #f0f0f0',
-          color: '#8c8c8c',
-          padding: '24px 50px',
-        }}
-      >
-        Storefront Shop © {new Date().getFullYear()} — Powered by React & Ant Design
-      </Footer>
+      {/* Linked Custom Footer Component */}
+      <CustomFooter />
     </Layout>
-
   )
 }
 
 export default ShopLayout
-
