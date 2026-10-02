@@ -7,7 +7,6 @@ import {
 } from '@ant-design/icons'
 
 const Footer = () => {
-  // Footer main container style (Light Pink background)
   const myStyle = {
     backgroundColor: '#fce7f3', // Light pink background
     padding: '40px 60px',
@@ -19,21 +18,13 @@ const Footer = () => {
     margin: '0 auto',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: '24px',
     flexWrap: 'wrap',
   }
 
-  // Individual card style (Coral Pink block)
-  const cardStyle = {
-    backgroundColor: '#e57373', // Coral/rose block color
-    borderRadius: '4px',
-    padding: '24px',
+  const columnStyle = {
     flex: '1 1 280px',
-    minHeight: '130px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
   }
 
   const titleStyle = {
@@ -84,20 +75,17 @@ const Footer = () => {
   return (
     <footer style={myStyle}>
       <div style={containerStyle}>
-        {/* Card 1: About Prettier */}
-        <div style={cardStyle}>
+        <div style={columnStyle}>
           <div style={titleStyle}>About Prettier</div>
-          <p style={textStyle}>Description</p>
+          <p style={textStyle}>We are a modern creative agency dedicated to crafting seamless web experiences, elegant designs, and clean, readable code that makes your digital presence stand out.</p>
         </div>
 
-        {/* Card 2: Links */}
-        <div style={cardStyle}>
+        <div style={columnStyle}>
           <div style={titleStyle}>Links</div>
           <p style={textStyle}>Description</p>
         </div>
 
-        {/* Card 3: Our Contacts */}
-        <div style={cardStyle}>
+        <div style={columnStyle}>
           <div style={titleStyle}>Our Contacts</div>
           <div style={socialIconsStyle}>
             <FacebookFilled style={iconFbStyle} />
