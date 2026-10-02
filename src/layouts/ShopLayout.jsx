@@ -1,5 +1,6 @@
 import { Outlet, useNavigate } from 'react-router'
 import { Layout, Button, Space } from 'antd'
+import NavigationBar from '../components/NavigationBar'
 import {
   ShopOutlined,
   DashboardOutlined,
@@ -14,6 +15,7 @@ function ShopLayout() {
   return (
     <Layout style={{ minHeight: '100vh', background: '#f8fafc' }}>
       {/* Top Shop Navigation Header */}
+       <NavigationBar />
       <Header
         style={{
           position: 'sticky',
@@ -101,6 +103,7 @@ function ShopLayout() {
         Storefront Shop © {new Date().getFullYear()} — Powered by React & Ant Design
       </Footer>
     </Layout>
+
   )
 }
 
