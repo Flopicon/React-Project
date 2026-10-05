@@ -31,6 +31,7 @@ function ShopLayout() {
 
       {/* Linked Custom Footer Component */}
       <CustomFooter />
+
     </Layout>
   )
 }

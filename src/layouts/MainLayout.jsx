@@ -66,6 +66,7 @@ function MainLayout() {
             }}
           >
             <Outlet />
+           
           </div>
         </Content>
 
