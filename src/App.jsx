@@ -122,7 +122,7 @@ function App() {
 
       <Route
         element={
-          user?.role === 'customer' ? (
+          user ? (
             <ShopLayout onLogout={handleLogout} />
           ) : (
             <Navigate
@@ -138,7 +138,7 @@ function App() {
           element={
             <div>
               <h1>Shop</h1>
-              <p>
+              <p> 
                 Welcome to Korean Beauty Shop.
               </p>
             </div>
