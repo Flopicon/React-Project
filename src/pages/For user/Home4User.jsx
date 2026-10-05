@@ -8,31 +8,48 @@ import banner3 from '../assets/banner3.png'
 import makeup from '../assets/makeup.png'
 import lotus from '../assets/lotus.png'
 
+
+// =========================
+// BANNERS
+// =========================
+
+const banners = [
+  banner1,
+  banner2,
+  banner3,
+]
+
+
 function Home4User() {
   const navigate = useNavigate()
 
   // =========================
-  // BANNERS
+  // BANNER STATE
   // =========================
-
-  const banners = [
-    banner1,
-    banner2,
-    banner3,
-  ]
 
   const [currentBanner, setCurrentBanner] = useState(0)
 
-  // Automatically change banner every 3 seconds
+
+  // =========================
+  // AUTOMATIC BANNER
+  // =========================
+
   useEffect(() => {
+
     const timer = setInterval(() => {
+
       setCurrentBanner((prev) => {
         return (prev + 1) % banners.length
       })
+
     }, 3000)
 
-    return () => clearInterval(timer)
-  }, [banners.length])
+    return () => {
+      clearInterval(timer)
+    }
+
+  }, [])
+
 
   // =========================
   // STYLES
@@ -46,6 +63,7 @@ function Home4User() {
       background: '#ffffff',
     },
 
+
     // =========================
     // BANNER
     // =========================
@@ -58,12 +76,14 @@ function Home4User() {
       marginBottom: '40px',
     },
 
+
     bannerSlider: {
       display: 'flex',
       width: '100%',
       height: '100%',
       transition: 'transform 0.8s ease-in-out',
     },
+
 
     bannerImage: {
       flex: '0 0 100%',
@@ -73,6 +93,7 @@ function Home4User() {
       objectPosition: 'center',
       display: 'block',
     },
+
 
     bannerOverlay: {
       position: 'absolute',
@@ -84,6 +105,7 @@ function Home4User() {
       pointerEvents: 'none',
     },
 
+
     bannerText: {
       position: 'absolute',
       top: '50%',
@@ -93,16 +115,19 @@ function Home4User() {
       color: '#222222',
     },
 
+
     bannerTitle: {
       fontSize: '38px',
       fontWeight: '700',
       margin: '0 0 10px 0',
     },
 
+
     bannerDescription: {
       fontSize: '17px',
       margin: '0 0 20px 0',
     },
+
 
     shopButton: {
       background: '#e8666a',
@@ -113,6 +138,7 @@ function Home4User() {
       cursor: 'pointer',
       fontSize: '14px',
     },
+
 
     // =========================
     // DOTS
@@ -128,6 +154,7 @@ function Home4User() {
       zIndex: 10,
     },
 
+
     dot: {
       width: '10px',
       height: '10px',
@@ -139,8 +166,9 @@ function Home4User() {
       transition: 'all 0.3s ease',
     },
 
+
     // =========================
-    // PRODUCT SECTION
+    // SECTION
     // =========================
 
     section: {
@@ -149,12 +177,14 @@ function Home4User() {
       marginBottom: '40px',
     },
 
+
     sectionTitle: {
       fontSize: '20px',
       fontWeight: '700',
       margin: '0 0 25px 0',
       color: '#111111',
     },
+
 
     // =========================
     // PRODUCT GRID
@@ -166,6 +196,7 @@ function Home4User() {
       gap: '22px 25px',
     },
 
+
     // =========================
     // PRODUCT CARD
     // =========================
@@ -176,8 +207,10 @@ function Home4User() {
       overflow: 'hidden',
       background: '#ffffff',
       cursor: 'pointer',
-      transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+      transition:
+        'transform 0.25s ease, box-shadow 0.25s ease',
     },
+
 
     productImageContainer: {
       width: '100%',
@@ -186,6 +219,7 @@ function Home4User() {
       background: '#eeeeee',
     },
 
+
     productImage: {
       width: '100%',
       height: '100%',
@@ -193,6 +227,7 @@ function Home4User() {
       display: 'block',
       transition: 'transform 0.4s ease',
     },
+
 
     productInfo: {
       width: '100%',
@@ -204,6 +239,7 @@ function Home4User() {
       justifyContent: 'space-between',
     },
 
+
     productName: {
       margin: 0,
       fontSize: '12px',
@@ -211,11 +247,13 @@ function Home4User() {
       color: '#111111',
     },
 
+
     productDescription: {
       margin: '4px 0 0 0',
       fontSize: '11px',
       color: '#111111',
     },
+
 
     productSold: {
       margin: 0,
@@ -223,13 +261,16 @@ function Home4User() {
       color: '#111111',
       textAlign: 'right',
     },
+
   }
 
+
   // =========================
-  // PRODUCTS
+  // BEST SELLERS
   // =========================
 
   const bestSellers = [
+
     {
       id: 1,
       name: 'Toner',
@@ -237,6 +278,7 @@ function Home4User() {
       sold: 99,
       image: makeup,
     },
+
     {
       id: 2,
       name: 'Lotus Toner',
@@ -244,6 +286,7 @@ function Home4User() {
       sold: 99,
       image: lotus,
     },
+
     {
       id: 3,
       name: 'Beauty Cream',
@@ -251,6 +294,7 @@ function Home4User() {
       sold: 99,
       image: makeup,
     },
+
     {
       id: 4,
       name: 'Face Toner',
@@ -258,6 +302,7 @@ function Home4User() {
       sold: 99,
       image: lotus,
     },
+
     {
       id: 5,
       name: 'Skin Cream',
@@ -265,6 +310,7 @@ function Home4User() {
       sold: 99,
       image: makeup,
     },
+
     {
       id: 6,
       name: 'Lotus Cream',
@@ -272,9 +318,16 @@ function Home4User() {
       sold: 99,
       image: lotus,
     },
+
   ]
 
+
+  // =========================
+  // NEW ARRIVALS
+  // =========================
+
   const newArrivals = [
+
     {
       id: 7,
       name: 'New Toner',
@@ -282,6 +335,7 @@ function Home4User() {
       sold: 99,
       image: lotus,
     },
+
     {
       id: 8,
       name: 'Glow Cream',
@@ -289,6 +343,7 @@ function Home4User() {
       sold: 99,
       image: makeup,
     },
+
     {
       id: 9,
       name: 'Lotus Serum',
@@ -296,6 +351,7 @@ function Home4User() {
       sold: 99,
       image: lotus,
     },
+
     {
       id: 10,
       name: 'Daily Toner',
@@ -303,6 +359,7 @@ function Home4User() {
       sold: 99,
       image: makeup,
     },
+
     {
       id: 11,
       name: 'Beauty Serum',
@@ -310,6 +367,7 @@ function Home4User() {
       sold: 99,
       image: lotus,
     },
+
     {
       id: 12,
       name: 'Soft Cream',
@@ -317,26 +375,42 @@ function Home4User() {
       sold: 99,
       image: makeup,
     },
+
   ]
+
 
   // =========================
   // PRODUCT CARD
   // =========================
 
   const renderProduct = (product) => (
+
     <div
       key={product.id}
       style={styles.productCard}
+
       onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)'
+
+        e.currentTarget.style.transform =
+          'translateY(-4px)'
+
         e.currentTarget.style.boxShadow =
           '0 6px 18px rgba(0,0,0,0.12)'
+
       }}
+
       onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.boxShadow = 'none'
+
+        e.currentTarget.style.transform =
+          'translateY(0)'
+
+        e.currentTarget.style.boxShadow =
+          'none'
+
       }}
     >
+
+      {/* Image */}
 
       <div style={styles.productImageContainer}>
 
@@ -344,15 +418,12 @@ function Home4User() {
           src={product.image}
           alt={product.name}
           style={styles.productImage}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.06)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)'
-          }}
         />
 
       </div>
+
+
+      {/* Information */}
 
       <div style={styles.productInfo}>
 
@@ -375,46 +446,55 @@ function Home4User() {
       </div>
 
     </div>
+
   )
+
 
   // =========================
   // RETURN
   // =========================
 
   return (
+
     <div style={styles.home}>
 
       {/* =========================
-          ANIMATED BANNER
+          BANNER
       ========================= */}
 
       <section style={styles.banner}>
 
-        {/* Sliding images */}
+        {/* SLIDER */}
 
         <div
           style={{
             ...styles.bannerSlider,
-            transform: `translateX(-${currentBanner * 100}%)`,
+
+            transform:
+              `translateX(-${currentBanner * 100}%)`,
           }}
         >
 
           {banners.map((image, index) => (
+
             <img
               key={index}
               src={image}
               alt={`Banner ${index + 1}`}
               style={styles.bannerImage}
             />
+
           ))}
 
         </div>
 
-        {/* Overlay */}
+
+        {/* OVERLAY */}
 
         <div style={styles.bannerOverlay}></div>
 
-        {/* Banner text */}
+
+        {/* TEXT */}
 
         <div style={styles.bannerText}>
 
@@ -438,19 +518,24 @@ function Home4User() {
 
         </div>
 
-        {/* Dots */}
+
+        {/* DOTS */}
 
         <div style={styles.dots}>
 
           {banners.map((_, index) => (
+
             <button
               key={index}
               type="button"
+
               onClick={() =>
                 setCurrentBanner(index)
               }
+
               style={{
                 ...styles.dot,
+
                 opacity:
                   currentBanner === index
                     ? 1
@@ -462,6 +547,7 @@ function Home4User() {
                     : 'scale(1)',
               }}
             />
+
           ))}
 
         </div>
@@ -480,7 +566,9 @@ function Home4User() {
         </h2>
 
         <div style={styles.productGrid}>
+
           {bestSellers.map(renderProduct)}
+
         </div>
 
       </section>
@@ -497,12 +585,15 @@ function Home4User() {
         </h2>
 
         <div style={styles.productGrid}>
+
           {newArrivals.map(renderProduct)}
+
         </div>
 
       </section>
 
     </div>
+
   )
 }
 
