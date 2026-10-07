@@ -14,6 +14,7 @@ function MainLayout() {
   const breadcrumbMap = {
     '/': ['Overview'],
     '/products': ['Products'],
+    '/categories': ['Categories'],
     '/users': ['Users'],
     '/add-product': ['Add Product'],
   }
@@ -66,6 +67,7 @@ function MainLayout() {
             }}
           >
             <Outlet />
+           
           </div>
         </Content>
 

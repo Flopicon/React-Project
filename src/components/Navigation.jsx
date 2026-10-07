@@ -4,6 +4,7 @@ import { Menu } from 'antd'
 
 import {
   AppstoreOutlined,
+  TagsOutlined,
   HomeOutlined,
   ShopOutlined,
   UserOutlined,
@@ -25,6 +26,11 @@ function Navigation({ isCollapsed }) {
       key: '/products',
       icon: <AppstoreOutlined />,
       label: 'Products',
+    },
+    {
+      key: '/categories',
+      icon: <TagsOutlined />,
+      label: 'Categories',
     },
     {
       key: '/users',
