@@ -1,52 +1,113 @@
 import React from "react";
-const NavigationBar = () => {
-  const myStyle = {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "76px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "0 60px",
-    backgroundColor: "white",
-    borderBottom: "1px solid #eeeeee",
-    zIndex: 9999,
-  };
+import { Layout, Menu, Typography, Button } from "antd";
+import {
+  HomeOutlined,
+  AppstoreOutlined,
+  ShoppingCartOutlined,
+  LoginOutlined,
+} from "@ant-design/icons";
+import { Link } from "react-router";
 
-  const logoStyle = {
-    color:"pink",
-    fontSize: "30px",
-    fontWeight: "800",
-  };
+const { Header } = Layout;
+const { Title } = Typography;
 
-  const linksStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "40px",
-  };
-  const linkStyle = {
-    textDecoration: "none",
-    color: "#222",
-    fontSize: "16px",
-  };
+function NavigationBar() {
+  const menuItems = [
+    {
+      key: "/",
+      icon: <HomeOutlined />,
+      label: <Link to="/">Home</Link>,
+    },
+    {
+      key: "/products",
+      icon: <AppstoreOutlined />,
+      label: <Link to="/products">Products</Link>,
+    },
+    {
+      key: "/cart",
+      icon: <ShoppingCartOutlined />,
+      label: <Link to="/cart">Cart</Link>,
+    },
+  ];
+
   return (
-    
-    <nav style={myStyle}>
-      <div style={logoStyle}>Prettier</div>
+    <Header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "76px",
+        padding: "0 60px",
+        background: "#ffffff",
+        borderBottom: "1px solid #eeeeee",
+        display: "flex",
+        alignItems: "center",
+        zIndex: 1000,
+      }}
+    >
 
-      <div style={linksStyle}>
-        <a href="/" style={linkStyle}>
-          Home
-        </a>
-        <a href="/products" style={linkStyle}>Product </a>
-        <a href="/cart" style={linkStyle}> Cart </a>
-        <a href="/login" style={linkStyle}> Login </a>
-      </div>
-    </nav>
-    
+      {/* =========================
+          LOGO
+      ========================= */}
+
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          marginRight: "auto",
+        }}
+      >
+        <Title
+          level={3}
+          style={{
+            margin: 0,
+            color: "#ed6a73",
+            fontWeight: 800,
+          }}
+        >
+          Prettier
+        </Title>
+      </Link>
+
+
+      {/* =========================
+          MENU
+      ========================= */}
+
+      <Menu
+        mode="horizontal"
+        items={menuItems}
+        selectable={false}
+        style={{
+          borderBottom: "none",
+          background: "transparent",
+          minWidth: 360,
+          justifyContent: "center",
+        }}
+      />
+
+
+      {/* =========================
+          LOGIN
+      ========================= */}
+
+      <Link
+        to="/login"
+        style={{
+          marginLeft: 30,
+        }}
+      >
+        <Button
+          type="primary"
+          icon={<LoginOutlined />}
+        >
+          Login
+        </Button>
+      </Link>
+
+    </Header>
   );
-};
+}
 
 export default NavigationBar;

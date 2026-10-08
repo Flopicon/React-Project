@@ -10,11 +10,13 @@ import UserTable from "../components/UserTable"
 function UserPage() {
   return (
     <div className="products-page">
+     
       <div style={{ marginBottom: 24 }}>
         <h2 style={{ margin: '4px 0 8px' }}>Users</h2>
         <p style={{ color: '#8c8c8c', margin: 0 }}>
           Manage user accounts and permissions from one place.
         </p>
+
       </div>
       <UserTable />
     </div>
