@@ -1,38 +1,8 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: Inter, Arial, Helvetica, sans-serif;
   background: #f5f7fa;
   color: #1f2937;
-}
-
-a {
-  color: inherit;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-button,
-.primary-link {
-  min-height: 44px;
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 16px;
-  background: #d77b94;
-  color: #ffffff;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-button,
-input {
-  font: inherit;
 }
 
 button,
@@ -741,23 +711,53 @@ input {
 
 .product-toolbar {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: end;
   gap: 12px;
+  width: 100%;
   margin-bottom: 16px;
 }
 
-.product-toolbar .ant-input-affix-wrapper {
-  flex: 1 1 280px;
-  min-width: 220px;
+.product-controls-row {
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
-.product-toolbar .ant-select {
-  flex: 0 1 220px;
-  min-width: 180px;
+.product-toolbar > .product-search {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 0;
+}
+
+.product-toolbar > .ant-space-compact {
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+.product-toolbar-button,
+.product-toolbar > .product-search,
+.product-toolbar > .ant-space-compact .ant-btn {
+  height: 40px;
+}
+
+.product-search .ant-input,
+.product-search .ant-input-group-addon,
+.product-search .ant-input-search-button {
+  height: 40px;
+}
+
+.product-search .ant-input-search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-toolbar-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .category-filter-menu {
-  width: 240px;
+  /* width: 240px; */
   padding: 8px;
   border-radius: 8px;
   background: #ffffff;
@@ -765,7 +765,7 @@ input {
 }
 
 .category-filter-menu .ant-menu {
-  max-height: 240px;
+  /* max-height: 240px; */
   margin-top: 8px;
   overflow-y: auto;
   border-inline-end: 0;

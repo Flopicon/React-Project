@@ -26,7 +26,7 @@ import {
 } from '@ant-design/icons'
 
 const { Title } = Typography
-
+const { Search } = Input;
 function ProductsPage() {
   const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
   const API_URL = `${API_BASE_URL}/product`
@@ -137,7 +137,9 @@ function ProductsPage() {
       setLoading(false)
     }
   }
-
+  const onSearch = (value, _e, info) => {
+    searchProducts(value);
+  };
   const searchProducts = async (name) => {
     setLoading(true)
 
@@ -435,23 +437,11 @@ function ProductsPage() {
         <Title level={2} style={{ margin: 0 }}>
           Products
         </Title>
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={() => setIsAddModalOpen(true)}
-        >
-          Add Product
-        </Button>
+       
       </div>
 
-      <div className="product-toolbar">
-        <Input
-          allowClear
-          value={searchValue}
-          prefix={<SearchOutlined />}
-          placeholder="Search products by name"
-          onChange={(event) => setSearchValue(event.target.value)}
-        />
+      <div className="product-toolbar product-controls-row" >
+        <Search placeholder="search product by name" onSearch={onSearch} style={{ width: 300 }} />
         <Space.Compact>
           <Dropdown
             trigger={['click']}
@@ -469,16 +459,31 @@ function ProductsPage() {
                 />
                 {menu}
               </div>
+              
             )}
           >
-            <Button icon={<FilterOutlined />}>
+            
+            <Button className="product-toolbar-button" icon={<FilterOutlined />}>
               {selectedCategory?.label || 'Filter by category'}
             </Button>
           </Dropdown>
           {categoryFilter && (
-            <Button onClick={() => setCategoryFilter(undefined)}>Clear</Button>
+            <Button
+              className="product-toolbar-button"
+              onClick={() => setCategoryFilter(undefined)}
+            >
+              Clear
+            </Button>
           )}
         </Space.Compact>
+         <Button
+          className="product-toolbar-button"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => setIsAddModalOpen(true)}
+        >
+          Add Product
+        </Button>
       </div>
 
       {/* Main Table */}
